@@ -37,7 +37,7 @@
     section { padding:4.5rem 0; scroll-margin-top:80px; }
     .section-head { max-width:680px; margin-bottom:2rem; }
     h2 { font-size:clamp(2rem,4vw,3.2rem); line-height:1.1; margin:.4rem 0 1rem; letter-spacing:-.035em; }
-    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .game-frame { overflow:hidden; border:1px solid var(--line); border-radius:1.25rem; background:#f8f6ff; box-shadow:0 18px 50px #0003; }\n    .game-frame iframe { display:block; width:100%; height:1450px; border:0; }\n    .game-note { text-align:center; color:var(--muted); margin-top:1rem; }\n    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
     .card { padding:1.4rem; border:1px solid var(--line); border-radius:1.2rem; background:linear-gradient(145deg,#171b3b,#10132d); }
     .card .emoji { font-size:2rem; }
     .card h3 { margin:.6rem 0 .4rem; }
@@ -47,7 +47,7 @@
     .contact { border:1px solid var(--line); border-radius:1.5rem; padding:clamp(1.5rem,5vw,3rem); background:linear-gradient(120deg,#171b3b,#17132e); display:flex; justify-content:space-between; align-items:center; gap:2rem; }
     footer { border-top:1px solid var(--line); padding:1.5rem 0; color:var(--muted); font-size:.9rem; }
     footer .wrap { display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
-    @media (max-width:720px) { .hero,.about-grid { grid-template-columns:1fr; } .hero { padding:3.5rem 0; } .orbit { min-height:260px; } .cards { grid-template-columns:1fr; } .contact { align-items:flex-start; flex-direction:column; } nav { align-items:flex-start; flex-direction:column; padding:1rem 0; } .navlinks { gap:.8rem; } }
+    @media (max-width:720px) { .game-frame iframe { height:1750px; } .hero,.about-grid { grid-template-columns:1fr; } .hero { padding:3.5rem 0; } .orbit { min-height:260px; } .cards { grid-template-columns:1fr; } .contact { align-items:flex-start; flex-direction:column; } nav { align-items:flex-start; flex-direction:column; padding:1rem 0; } .navlinks { gap:.8rem; } }
     @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } }
   </style>
 </head>
@@ -56,7 +56,7 @@
     <nav class="wrap" aria-label="Main navigation">
       <a class="brand" href="#home">👾 COSMIC CLASH</a>
       <div class="navlinks">
-        <a href="#home">Home</a><a href="#about">About</a><a href="#contact">Contact</a>
+        <a href="#home">Home</a><a href="#play">Play</a><a href="#about">About</a><a href="#contact">Contact</a>
       </div>
     </nav>
   </header>
@@ -67,14 +67,26 @@
         <h1>Small board.<br><span>Cosmic chaos.</span></h1>
         <p class="lead">Meet Alien Tic-Tac-Toe: Cosmic Clash — the classic battle of Xs and Os, reimagined with adorable extraterrestrial energy. Pick your side and let the friendly rivalry begin.</p>
         <div class="actions">
-          <a class="btn primary" href="https://github.com/build2gitwhy-pixel/MyFirstGame" target="_blank" rel="noopener noreferrer">Explore the game ↗</a>
-          <a class="btn secondary" href="#about">Meet the mission</a>
+          <a class="btn primary" href="https://github.com/build2gitwhy-pixel/MyFirstGame" target="_blank" rel="noopener noreferrer">View game source ↗</a>
+          <a class="btn secondary" href="#play">Play now ↓</a>
         </div>
       </div>
       <div class="orbit" aria-label="Illustration of a cute alien planet">
         <span class="floaty one" aria-hidden="true">✨</span><span class="floaty two" aria-hidden="true">🛸</span><span class="floaty three" aria-hidden="true">✦</span>
         <div class="planet" aria-hidden="true">👽</div>
       </div>
+    </section>
+
+    <section class="wrap" id="play" aria-labelledby="play-title">
+      <div class="section-head">
+        <p class="eyebrow">Play right here</p>
+        <h2 id="play-title">Enter the Cosmic Clash.</h2>
+        <p class="section-copy">Choose a square, battle the alien, and try to make three in a row. The full game is playable below without leaving this page.</p>
+      </div>
+      <div class="game-frame">
+        <iframe id="cosmic-game" src="game.html" title="Alien Tic-Tac-Toe: Cosmic Clash playable game" loading="lazy"></iframe>
+      </div>
+      <p class="game-note">Want to explore how it works? <a href="https://github.com/build2gitwhy-pixel/MyFirstGame" target="_blank" rel="noopener noreferrer">View the game source on GitHub ↗</a></p>
     </section>
     <section class="wrap" aria-labelledby="features-title">
       <div class="section-head">
@@ -107,6 +119,14 @@
     </section>
   </main>
   <footer><div class="wrap"><span>© <span id="year">2026</span> Cosmic Clash</span><span>Made for curious minds across the galaxy ✦</span></div></footer>
-  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.addEventListener("message", function (event) {
+      if (event.source !== document.getElementById("cosmic-game").contentWindow) return;
+      if (event.data && event.data.type === "cosmic-clash-resize" && Number.isFinite(event.data.height)) {
+        document.getElementById("cosmic-game").style.height = Math.max(950, Math.min(2400, event.data.height)) + "px";
+      }
+    });
+  </script>
 </body>
 </html>
