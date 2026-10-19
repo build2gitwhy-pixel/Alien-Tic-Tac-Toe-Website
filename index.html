@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b24">
+  <meta name="description" content="Meet Alien Tic-Tac-Toe: Cosmic Clash — a cute, cosmic twist on a classic game.">
+  <title>Alien Tic-Tac-Toe: Cosmic Clash</title>
+  <style>
+    :root { color-scheme: dark; --bg:#090b24; --panel:#131735; --ink:#f5f4ff; --muted:#b9bddb; --mint:#8fffe0; --pink:#ff9bd2; --line:#34395f; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:radial-gradient(ellipse at 80% 0%, #25205a 0%, transparent 40%), var(--bg); color:var(--ink); font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.6; }
+    a { color:var(--mint); }
+    a:focus-visible, button:focus-visible { outline:3px solid var(--pink); outline-offset:4px; }
+    .wrap { width:min(1080px, calc(100% - 2rem)); margin:auto; }
+    header { position:sticky; top:0; z-index:5; backdrop-filter:blur(12px); background:#090b24df; border-bottom:1px solid #34395f88; }
+    nav { display:flex; justify-content:space-between; align-items:center; gap:1rem; min-height:72px; }
+    .brand { color:var(--ink); text-decoration:none; font-weight:800; letter-spacing:.02em; }
+    .navlinks { display:flex; flex-wrap:wrap; gap:1.1rem; }
+    .navlinks a { color:var(--muted); text-decoration:none; font-weight:650; }
+    .navlinks a:hover { color:var(--mint); }
+    .hero { min-height:74vh; display:grid; grid-template-columns:1.15fr .85fr; gap:2rem; align-items:center; padding:5rem 0; }
+    .eyebrow { color:var(--mint); text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; font-weight:800; }
+    h1 { font-size:clamp(2.6rem, 7vw, 5.5rem); line-height:.98; letter-spacing:-.055em; margin:.7rem 0 1.2rem; }
+    h1 span { color:var(--pink); }
+    .lead { color:var(--muted); font-size:clamp(1.05rem, 2vw, 1.25rem); max-width:58ch; }
+    .actions { display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.8rem; }
+    .btn { display:inline-block; padding:.8rem 1.15rem; border-radius:999px; font-weight:800; text-decoration:none; border:1px solid var(--mint); }
+    .primary { background:var(--mint); color:#071326; }
+    .secondary { color:var(--ink); border-color:var(--line); }
+    .orbit { min-height:330px; display:grid; place-items:center; position:relative; }
+    .planet { width:min(290px,70vw); aspect-ratio:1; display:grid; place-items:center; border-radius:50%; background:radial-gradient(circle at 30% 25%,#a9ffe9,#62d8c2 35%,#3979a9 70%,#2c2a70); box-shadow:0 0 70px #8fffe044, inset -18px -22px 45px #090b2477; font-size:clamp(6rem,15vw,9rem); transform:rotate(-8deg); }
+    .floaty { position:absolute; font-size:2.4rem; animation:float 4s ease-in-out infinite; }
+    .one { top:12%; right:10%; } .two { bottom:12%; left:7%; animation-delay:-2s; } .three { top:15%; left:10%; font-size:1.5rem; }
+    @keyframes float { 50% { transform:translateY(-12px) rotate(8deg); } }
+    section { padding:4.5rem 0; scroll-margin-top:80px; }
+    .section-head { max-width:680px; margin-bottom:2rem; }
+    h2 { font-size:clamp(2rem,4vw,3.2rem); line-height:1.1; margin:.4rem 0 1rem; letter-spacing:-.035em; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .card { padding:1.4rem; border:1px solid var(--line); border-radius:1.2rem; background:linear-gradient(145deg,#171b3b,#10132d); }
+    .card .emoji { font-size:2rem; }
+    .card h3 { margin:.6rem 0 .4rem; }
+    .card p, .section-copy { color:var(--muted); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; }
+    .quote { border-left:3px solid var(--pink); padding:1rem 1.3rem; background:#17132e; border-radius:0 .8rem .8rem 0; color:#e9dff5; }
+    .contact { border:1px solid var(--line); border-radius:1.5rem; padding:clamp(1.5rem,5vw,3rem); background:linear-gradient(120deg,#171b3b,#17132e); display:flex; justify-content:space-between; align-items:center; gap:2rem; }
+    footer { border-top:1px solid var(--line); padding:1.5rem 0; color:var(--muted); font-size:.9rem; }
+    footer .wrap { display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+    @media (max-width:720px) { .hero,.about-grid { grid-template-columns:1fr; } .hero { padding:3.5rem 0; } .orbit { min-height:260px; } .cards { grid-template-columns:1fr; } .contact { align-items:flex-start; flex-direction:column; } nav { align-items:flex-start; flex-direction:column; padding:1rem 0; } .navlinks { gap:.8rem; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="brand" href="#home">👾 COSMIC CLASH</a>
+      <div class="navlinks">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="wrap hero" id="home">
+      <div>
+        <p class="eyebrow">A tiny game from another galaxy</p>
+        <h1>Small board.<br><span>Cosmic chaos.</span></h1>
+        <p class="lead">Meet Alien Tic-Tac-Toe: Cosmic Clash — the classic battle of Xs and Os, reimagined with adorable extraterrestrial energy. Pick your side and let the friendly rivalry begin.</p>
+        <div class="actions">
+          <a class="btn primary" href="https://github.com/build2gitwhy-pixel/MyFirstGame" target="_blank" rel="noopener noreferrer">Explore the game ↗</a>
+          <a class="btn secondary" href="#about">Meet the mission</a>
+        </div>
+      </div>
+      <div class="orbit" aria-label="Illustration of a cute alien planet">
+        <span class="floaty one" aria-hidden="true">✨</span><span class="floaty two" aria-hidden="true">🛸</span><span class="floaty three" aria-hidden="true">✦</span>
+        <div class="planet" aria-hidden="true">👽</div>
+      </div>
+    </section>
+    <section class="wrap" aria-labelledby="features-title">
+      <div class="section-head">
+        <p class="eyebrow">Your next mini-adventure</p>
+        <h2 id="features-title">Easy to learn. Fun to revisit.</h2>
+        <p class="section-copy">A familiar little challenge with a playful space-age personality. Bring a friend, take a turn, and see who claims the galaxy.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="emoji" aria-hidden="true">🪐</div><h3>Classic strategy</h3><p>Three in a row is still the mission. Every move counts, so keep your eyes on the stars.</p></article>
+        <article class="card"><div class="emoji" aria-hidden="true">👾</div><h3>Cute alien vibes</h3><p>A cheerful cosmic theme makes this timeless head-to-head game feel like a tiny space adventure.</p></article>
+        <article class="card"><div class="emoji" aria-hidden="true">💫</div><h3>Made to explore</h3><p>Check out the project on GitHub and follow along as this little game grows.</p></article>
+      </div>
+    </section>
+    <section class="wrap" id="about" aria-labelledby="about-title">
+      <div class="about-grid">
+        <div>
+          <p class="eyebrow">About the project</p>
+          <h2 id="about-title">Built with curiosity. Powered by play.</h2>
+          <p class="section-copy">Cosmic Clash is a small, approachable game project inspired by the joy of making something interactive. This companion site gives the game a home, shares its story, and makes it easy for curious developers to explore the code.</p>
+          <p class="section-copy">Whether you're here to play, peek under the hood, or get inspired to build your own project, welcome aboard.</p>
+        </div>
+        <div class="quote">“The universe is enormous. A friendly little game is a pretty great place to start exploring it.”</div>
+      </div>
+    </section>
+    <section class="wrap" id="contact" aria-labelledby="contact-title">
+      <div class="contact">
+        <div><p class="eyebrow">Say hello, earthling</p><h2 id="contact-title">Have an idea from outer space?</h2><p class="section-copy">Share feedback, explore the source, or follow the project on GitHub.</p></div>
+        <a class="btn primary" href="https://github.com/build2gitwhy-pixel/MyFirstGame" target="_blank" rel="noopener noreferrer">Visit GitHub ↗</a>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap"><span>© <span id="year">2026</span> Cosmic Clash</span><span>Made for curious minds across the galaxy ✦</span></div></footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
